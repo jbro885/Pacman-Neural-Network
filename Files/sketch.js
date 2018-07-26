@@ -46,12 +46,12 @@ function draw() {
   // How many times to advance the game
   for (let n = 0; n < cycles; n++) {
     // Show all the pipes
-    for (let i = pipes.length - 1; i >= 0; i--) {
-      pipes[i].update();
-      if (pipes[i].offscreen()) {
-        pipes.splice(i, 1);
-      }
-    }
+    // for (let i = pipes.length - 1; i >= 0; i--) {
+    //   pipes[i].update();
+    //   if (pipes[i].offscreen()) {
+    //     pipes.splice(i, 1);
+    //   }
+    // }
     // Are we just running the best bird
     if (runBest) {
       bestBird.think(pipes);
@@ -76,14 +76,14 @@ function draw() {
         bird.update();
 
         // Check all the pipes
-        for (let j = 0; j < pipes.length; j++) {
-          // It's hit a pipe
-          if (pipes[j].hits(activeBirds[i])) {
-            // Remove this bird
-            activeBirds.splice(i, 1);
-            break;
-          }
-        }
+        // for (let j = 0; j < pipes.length; j++) {
+        //   // It's hit a pipe
+        //   if (pipes[j].hits(activeBirds[i])) {
+        //     // Remove this bird
+        //     activeBirds.splice(i, 1);
+        //     break;
+        //   }
+        // }
 
         if (bird.bottomTop()) {
           activeBirds.splice(i, 1);

@@ -18,24 +18,26 @@ class PacMan {
     this.y = height / 2;
     this.r = 12;
 
-    // Gravity, lift and velocity
-    this.gravity = 0.8;
-    this.lift = -12;
-    this.velocity = 0;
+    // Speed
+    this.Speed = 1;
 
     // Is this a copy of another Bird or a new one?
     // The Neural Network is Pacmans's "brain"
-    if (brain instanceof NeuralNetwork) {
-      this.brain = brain.copy();
-      this.brain.mutate(mutate);
-    } else {
+    // if (brain instanceof NeuralNetwork) {
+    //   this.brain = brain.copy();
+    //   this.brain.mutate(mutate);
+    // } else {
       this.brain = new NeuralNetwork(5, 8, 2);
-    }
+    // }
 
     // Score is how many frames it's been alive
     this.score = 0;
     // Fitness is normalized version of score
     this.fitness = 0;
+    // Score is how many food it's has eaten
+    this.Foodscore = 0;
+    // Foodfitness is normalized version of Foodscore
+    this.Foodfitness = 0;
   }
 
   // Create a copy of this bird
@@ -45,38 +47,61 @@ class PacMan {
 
   // Display the Pacman
   show() {
-    fill(255, 100);
-    stroke(255);
+    fill(255, 240, 102);
     ellipse(this.x, this.y, this.r * 2, this.r * 2);
   }
 
   // This is the key function now that decides
   // if it should jump or not jump!
-  think(pipes) {
-    // First find the closest pipe
-    let closest = null;
-    let record = Infinity;
-    for (let i = 0; i < pipes.length; i++) {
-      let diff = pipes[i].x - this.x;
-      if (diff > 0 && diff < record) {
-        record = diff;
-        closest = pipes[i];
-      }
-    }
+  think(Ghost) {
 
-    if (closest != null) {
+
       // Now create the inputs to the neural network
       let inputs = [];
-      // x position of closest pipe
+
+
+  //Blinky
+      // x position
       inputs[0] = map(closest.x, this.x, width, 0, 1);
-      // top of closest pipe opening
+      // y position
       inputs[1] = map(closest.top, 0, height, 0, 1);
-      // bottom of closest pipe opening
-      inputs[2] = map(closest.bottom, 0, height, 0, 1);
-      // bird's y position
-      inputs[3] = map(this.y, 0, height, 0, 1);
-      // bird's y velocity
-      inputs[4] = map(this.velocity, -5, 5, 0, 1);
+
+  //Pinky
+      // x position
+      inputs[2] = map(closest.x, this.x, width, 0, 1);
+      // y position
+      inputs[3] = map(closest.top, 0, height, 0, 1);
+
+  //Inky
+      // x position
+      inputs[4] = map(closest.x, this.x, width, 0, 1);
+      // y position
+      inputs[5] = map(closest.top, 0, height, 0, 1);
+
+  //Clyde
+      // x position
+      inputs[6] = map(closest.x, this.x, width, 0, 1);
+      // y position
+      inputs[7] = map(closest.top, 0, height, 0, 1);
+
+  //Pacman
+      // x position
+      inputs[8] = map(closest.x, this.x, width, 0, 1);
+      // y position
+      inputs[9] = map(closest.top, 0, height, 0, 1);
+
+  //Field Infromation
+      // x position
+      inputs[10] = map(closest.x, this.x, width, 0, 1);
+
+  //Position of Dot
+      // x position
+      inputs[11] = map(closest.x, this.x, width, 0, 1);
+      // y position
+      inputs[12] = map(closest.top, 0, height, 0, 1);
+
+
+
 
       // Get the outputs from the network
       let action = this.brain.predict(inputs);
@@ -84,7 +109,7 @@ class PacMan {
       if (action[1] > action[0]) {
         this.up();
       }
-    }
+
   }
 
   // Jump up
