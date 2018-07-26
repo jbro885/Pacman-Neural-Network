@@ -1,7 +1,7 @@
 
 
 // How big is the population
-let totalPopulation = 500;
+let totalPopulation = 1;
 // All active birds (not yet collided with pipe)
 let activeBirds = [];
 // All birds for any given population
@@ -20,18 +20,18 @@ let runBestButton;
 
 
 // Toggle the state of the simulation
-function toggleState() {
-  runBest = !runBest;
-  // Show the best bird
-  if (runBest) {
-    resetGame();
-    runBestButton.html('continue training');
-    // Go train some more
-  } else {
-    nextGeneration();
-    runBestButton.html('run best');
-  }
-}
+// function toggleState() {
+//   runBest = !runBest;
+//   // Show the best bird
+//   if (runBest) {
+//     resetGame();
+//     runBestButton.html('continue training');
+//     // Go train some more
+//   } else {
+//     nextGeneration();
+//     runBestButton.html('run best');
+//   }
+// }
 
 
 
