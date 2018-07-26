@@ -8,10 +8,40 @@ background(0);
 //
   for (var i=0; i<FieldData.length; i++) {
     for (var c=0; c<FieldData[i].length; c++) {
+      //Wand
       if (FieldData[i][c] === 1) {
-        stroke(255);
+        // stroke(255);
+        noStroke();
         fill(200);
         rect(c*25, i*25, 25, 25);
+      }
+      //Dot
+      if (FieldData[i][c] === 0) {
+        fill(222, 255, 102);
+        noStroke();
+        var dotwith = 10;
+        ellipse(c*25+25/2, i*25+25/2, dotwith, dotwith);
+      }
+      //Kreuzung mit Punk
+      if (FieldData[i][c] === 4) {
+        fill(255, 0, 0);
+        noStroke();
+        var dotwith = 10;
+        ellipse(c*25+25/2, i*25+25/2, dotwith, dotwith);
+      }
+      //Kreuzung ohne Punkt
+      if (FieldData[i][c] === 5) {
+        fill(255, 0, 0);
+        noStroke();
+        var dotwith = 10;
+        ellipse(c*25+25/2, i*25+25/2, dotwith, dotwith);
+      }
+      //Eating
+      if (FieldData[i][c] === 2) {
+        noStroke();
+        fill(255, 102, 179);
+        var dotwith = 15;
+        ellipse(c*25+25/2, i*25+25/2, dotwith, dotwith);
       }
     }
   }

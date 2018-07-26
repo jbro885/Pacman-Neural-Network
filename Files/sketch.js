@@ -132,18 +132,18 @@ function draw() {
 
   // Draw everything!
   for (let i = 0; i < pipes.length; i++) {
-    pipes[i].show();
+    // pipes[i].show();
   }
 
-  if (runBest) {
-    bestBird.show();
-  } else {
-    for (let i = 0; i < activeBirds.length; i++) {
-      activeBirds[i].show();
-    }
-    // If we're out of birds go to the next generation
-    if (activeBirds.length == 0) {
-      nextGeneration();
-    }
-  }
+  // if (runBest) {
+  //   bestBird.show();
+  // } else {
+  //   for (let i = 0; i < activeBirds.length; i++) {
+  //     activeBirds[i].show();
+  //   }
+  //   // If we're out of birds go to the next generation
+  //   if (activeBirds.length == 0) {
+  //     nextGeneration();
+  //   }
+  // }
 }
