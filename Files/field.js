@@ -1,58 +1,47 @@
-// Daniel Shiffman
-// Nature of Code: Intelligence and Learning
-// https://github.com/shiffman/NOC-S17-2-Intelligence-Learning
+//Build the Field
 
-// This flappy bird implementation is adapted from:
-// https://youtu.be/cXgA1d_E-jY&
+function Field() {
 
-class Pipe {
-  constructor() {
+//Multidimensional Array Per dimansion 1 a new rect dimension 2==Cords
+var FieldRects = [
+  [20, 20, 60, 120],
+  [200, 340, 60, 120],
+  [400, 20, 60, 120],
+];
 
-    // How big is the empty space
-    let spacing = 125;
-    // Where is th center of the empty space
-    let centery = random(spacing, height - spacing);
 
-    // Top and bottom of pipe
-    this.top = centery - spacing / 2;
-    this.bottom = height - (centery + spacing / 2);
-    // Starts at the edge
-    this.x = width;
-    // Width of pipe
-    this.w = 80;
-    // How fast
-    this.speed = 6;
+  for (var i=0; i<FieldRects.length; i++) {
+      stroke(255);
+      fill(200);
+      rect(FieldRects[i][0], FieldRects[i][1], FieldRects[i][2], FieldRects[i][3]);
   }
+
+
+
 
   // Did this pipe hit a bird?
-  hits(bird) {
-    if ((bird.y - bird.r) < this.top || (bird.y + bird.r) > (height - this.bottom)) {
-      if (bird.x > this.x && bird.x < this.x + this.w) {
-        return true;
+  // hits(bird) {
+    //   if ((bird.y - bird.r) < this.top || (bird.y + bird.r) > (height - this.bottom)) {
+      //     if (bird.x > this.x && bird.x < this.x + this.w) {
+        //       return true;
+        //     }
+        //   }
+        //   return false;
+        // }
+
+        // Draw the pipe
+
+        // Update the pipe
+        // update() {
+        //   this.x -= this.speed;
+        // }
+        //
+        // // Has it moved offscreen?
+        // offscreen() {
+        //   if (this.x < -this.w) {
+        //     return true;
+        //   } else {
+        //     return false;
+        //   }
+        // }
       }
-    }
-    return false;
-  }
-
-  // Draw the pipe
-  show() {
-    stroke(255);
-    fill(200);
-    rect(this.x, 0, this.w, this.top);
-    rect(this.x, height - this.bottom, this.w, this.bottom);
-  }
-
-  // Update the pipe
-  update() {
-    this.x -= this.speed;
-  }
-
-  // Has it moved offscreen?
-  offscreen() {
-    if (this.x < -this.w) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-}

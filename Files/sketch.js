@@ -1,9 +1,4 @@
-// Daniel Shiffman
-// Nature of Code: Intelligence and Learning
-// https://github.com/shiffman/NOC-S18
 
-// This flappy bird implementation is adapted from:
-// https://youtu.be/cXgA1d_E-jY&
 
 // How big is the population
 let totalPopulation = 500;
@@ -16,38 +11,13 @@ let pipes = [];
 // A frame counter to determine when to add a pipe
 let counter = 0;
 
-// Interface elements
-let speedSlider;
-let speedSpan;
-let highScoreSpan;
-let allTimeHighScoreSpan;
 
-// All time high score
-let highScore = 0;
+
 
 // Training or just showing the current best
 let runBest = false;
 let runBestButton;
 
-function setup() {
-  let canvas = createCanvas(600, 400);
-  canvas.parent('canvascontainer');
-
-  // Access the interface elements
-  speedSlider = select('#speedSlider');
-  speedSpan = select('#speed');
-  highScoreSpan = select('#hs');
-  allTimeHighScoreSpan = select('#ahs');
-  runBestButton = select('#best');
-  runBestButton.mousePressed(toggleState);
-
-  // Create a population
-  for (let i = 0; i < totalPopulation; i++) {
-    let bird = new Bird();
-    activeBirds[i] = bird;
-    allBirds[i] = bird;
-  }
-}
 
 // Toggle the state of the simulation
 function toggleState() {
@@ -124,7 +94,7 @@ function draw() {
 
     // Add a new pipe every so often
     if (counter % 75 == 0) {
-      pipes.push(new Pipe());
+      pipes.push(new Ghost());
     }
     counter++;
   }

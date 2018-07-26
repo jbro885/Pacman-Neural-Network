@@ -1,9 +1,4 @@
-// Daniel Shiffman
-// Nature of Code: Intelligence and Learning
-// https://github.com/shiffman/NOC-S17-2-Intelligence-Learning
 
-// This flappy bird implementation is adapted from:
-// https://youtu.be/cXgA1d_E-jY&
 
 // Mutation function to be passed into bird.brain
 function mutate(x) {
@@ -16,7 +11,7 @@ function mutate(x) {
   }
 }
 
-class Bird {
+class PacMan {
   constructor(brain) {
     // position and size of bird
     this.x = 64;
@@ -29,7 +24,7 @@ class Bird {
     this.velocity = 0;
 
     // Is this a copy of another Bird or a new one?
-    // The Neural Network is the bird's "brain"
+    // The Neural Network is Pacmans's "brain"
     if (brain instanceof NeuralNetwork) {
       this.brain = brain.copy();
       this.brain.mutate(mutate);
@@ -45,10 +40,10 @@ class Bird {
 
   // Create a copy of this bird
   copy() {
-    return new Bird(this.brain);
+    return new PacMan(this.brain);
   }
 
-  // Display the bird
+  // Display the Pacman
   show() {
     fill(255, 100);
     stroke(255);
