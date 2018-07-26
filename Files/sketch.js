@@ -8,6 +8,7 @@ let runBest = false;
 let runBestButton;
 
 
+
 function draw() {
   Field();
 
@@ -37,13 +38,33 @@ function draw() {
           // It's hit a Rong Field
           //pipes[j].hits(activePacs[i])
           if (FieldData[PacMan.cy()][PacMan.cx()] === 1) {
-            // Remove this bird
-            // console.log("hit!");
+            // Remove this Pacman
+            console.log("hit!");
             activePacs.splice(i, 1);
             break;
           }
 
 
+
+          console.log(PacMan.directonstate());
+          //Reamove if stay still
+          var cIsS = 0;
+          var cIsSx = 0;
+          var cIsSy = 0;
+
+          if (PacMan.cy() == cIsSy && PacMan.cx() == cIsSx) {
+            cIsS++;
+            if (cIsS >= 4) {
+              // Remove this Pacman
+              console.log("Stand Still");
+              cIsS = 0;
+              activePacs.splice(i, 1);
+              break;
+            }
+          } else {
+            cIsSx = PacMan.cx();
+            cIsSy = PacMan.cy();
+          }
       }
 
 

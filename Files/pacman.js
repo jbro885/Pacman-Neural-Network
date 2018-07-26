@@ -27,7 +27,7 @@ class PacMan {
     this.fieldr = this.r;
 
     // Speed
-    this.Speed = 0.02;
+    this.Speed = 0.05;
 
     // Is this a copy of another Bird or a new one?
     // The Neural Network is Pacmans's "brain"
@@ -35,7 +35,7 @@ class PacMan {
     //   this.brain = brain.copy();
     //   this.brain.mutate(mutate);
     // } else {
-      this.brain = new NeuralNetwork(16, 32, 4);
+      this.brain = new NeuralNetwork(17, 32, 4);
     // }
 
     // Score is how many frames it's been alive
@@ -101,26 +101,31 @@ class PacMan {
 
   //Field Infromations
       let iv3 = Math.round(this.x);
+      // console.log(this.x);
       let iv4 = Math.round(this.y);
+      // console.log(this.y);
 
       // uper field
-      inputs[10] = FieldData[iv4-1][iv3];
+      inputs[10] = FieldData[iv4-1][iv3] / 10;
       // lower field
-      inputs[11] = FieldData[iv4+1][iv3];
+      inputs[11] = FieldData[iv4+1][iv3] / 10;
       // Left field
-      inputs[12] = FieldData[iv4][iv3-1];
+      inputs[12] = FieldData[iv4][iv3-1] / 10;
       // Right field
-      inputs[13] = FieldData[iv4][iv3+1];
-      // console.log("up: "+inputs[10]);
-      // console.log("low: "+inputs[11]);
-      // console.log("l: "+inputs[12]);
-      // console.log("r: "+inputs[13]);
+      inputs[13] = FieldData[iv4][iv3+1] / 10;
+      // Right field
+      inputs[14] = FieldData[iv4][iv3] / 10;
+      console.log("up: "+inputs[10]);
+      console.log("low: "+inputs[11]);
+      console.log("l: "+inputs[12]);
+      console.log("r: "+inputs[13]);
+      console.log("current: "+inputs[14]);
 
   //Position of Dot
       // x position
-      inputs[14] = 1;
-      // y position
       inputs[15] = 1;
+      // y position
+      inputs[16] = 1;
 
 
 
@@ -129,7 +134,7 @@ class PacMan {
       var action = this.brain.predict(inputs);
       // console.log("action= "+action);
 
-      var directonstate = Math.max(action[0], action[1], action[2], action[3]);
+      var directonstate = this.directonstate(action);
       if (directonstate === action[0]) {
         //Up
         this.y -= this.Speed;
@@ -146,7 +151,7 @@ class PacMan {
         //right
         this.x += this.Speed;
         console.log("Right");
-        console.log(this.Speed);
+        // console.log(this.Speed);
       } else {
         console.log("Keine Richtung definiert.");
       }
@@ -164,8 +169,9 @@ class PacMan {
   //
   //   }
   // }
-
-
+  directonstate(action) {
+    return Math.max(action[0], action[1], action[2], action[3]);
+  }
 
   // Update Pacmans's position based on velocity, gravity, etc.
   update() {
