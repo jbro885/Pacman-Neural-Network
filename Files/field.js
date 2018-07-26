@@ -1,19 +1,19 @@
 //Build the Field
 
 function Field() {
-
+background(0);
 //Multidimensional Array Per dimansion 1 a new rect dimension 2==Cords
-var FieldRects = [
-  [20, 20, 60, 120],
-  [200, 340, 60, 120],
-  [400, 20, 60, 120],
-];
 
 
-  for (var i=0; i<FieldRects.length; i++) {
-      stroke(255);
-      fill(200);
-      rect(FieldRects[i][0], FieldRects[i][1], FieldRects[i][2], FieldRects[i][3]);
+//
+  for (var i=0; i<FieldData.length; i++) {
+    for (var c=0; c<FieldData[i].length; c++) {
+      if (FieldData[i][c] === 1) {
+        stroke(255);
+        fill(200);
+        rect(c*25, i*25, 25, 25);
+      }
+    }
   }
 
 

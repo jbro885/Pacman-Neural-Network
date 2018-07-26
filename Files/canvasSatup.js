@@ -12,7 +12,7 @@ let highScore = 0;
 
 
 function setup() {
-  let canvas = createCanvas(546, 636);
+  let canvas = createCanvas(700, 775);
   canvas.parent('canvascontainer');
 
   // Access the interface elements

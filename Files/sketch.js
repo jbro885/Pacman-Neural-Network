@@ -36,7 +36,7 @@ function toggleState() {
 
 
 function draw() {
-  background(0);
+  Field();
 
   // Should we speed up cycles per frame
   let cycles = speedSlider.value();
