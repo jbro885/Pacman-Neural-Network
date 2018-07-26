@@ -1,5 +1,3 @@
-
-
 // This file includes functions for creating a new generation
 // of birds.
 
@@ -17,46 +15,46 @@ function resetGame() {
 function nextGeneration() {
   resetGame();
   // Normalize the fitness values 0-1
-  normalizeFitness(allBirds);
+  normalizeFitness(allPacs);
   // Generate a new set of birds
-  activeBirds = generate(allBirds);
+  activePacs = generate(allPacs);
   // Copy those birds to another array
-  allBirds = activeBirds.slice();
+  allPacs = activePacs.slice();
 }
 
 // Generate a new population of birds
-function generate(oldBirds) {
-  let newBirds = [];
-  for (let i = 0; i < oldBirds.length; i++) {
+function generate(oldPacs) {
+  let newPacs = [];
+  for (let i = 0; i < oldPacs.length; i++) {
     // Select a bird based on fitness
-    let bird = poolSelection(oldBirds);
-    newBirds[i] = bird;
+    let Pac = poolSelection(oldPacs);
+    newPacs[i] = Pac;
   }
-  return newBirds;
+  return newPacs;
 }
 
 // Normalize the fitness of all birds
-function normalizeFitness(birds) {
+function normalizeFitness(Pacs) {
   // Make score exponentially better?
-  for (let i = 0; i < birds.length; i++) {
-    birds[i].score = pow(birds[i].score, 2);
+  for (let i = 0; i < Pacs.length; i++) {
+    Pacs[i].score = pow(Pacs[i].score, 2);
   }
 
   // Add up all the scores
   let sum = 0;
-  for (let i = 0; i < birds.length; i++) {
-    sum += birds[i].score;
+  for (let i = 0; i < Pacs.length; i++) {
+    sum += Pacs[i].score;
   }
   // Divide by the sum
-  for (let i = 0; i < birds.length; i++) {
-    birds[i].fitness = birds[i].score / sum;
+  for (let i = 0; i < Pacs.length; i++) {
+    Pacs[i].fitness = Pacs[i].score / sum;
   }
 }
 
 
 // An algorithm for picking one bird from an array
 // based on fitness
-function poolSelection(birds) {
+function poolSelection(Pacs) {
   // Start at 0
   let index = 0;
 
@@ -67,7 +65,7 @@ function poolSelection(birds) {
   // Higher probabilities will be more likely to be fixed since they will
   // subtract a larger number towards zero
   while (r > 0) {
-    r -= birds[index].fitness;
+    r -= Pacs[index].fitness;
     // And move on to the next
     index += 1;
   }
@@ -77,5 +75,5 @@ function poolSelection(birds) {
 
   // Make sure it's a copy!
   // (this includes mutation)
-  return birds[index].copy();
+  return Pacs[index].copy();
 }

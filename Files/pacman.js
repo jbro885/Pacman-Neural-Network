@@ -14,9 +14,9 @@ function mutate(x) {
 class PacMan {
   constructor(brain) {
     // position and size of bird
-    this.x = 64;
-    this.y = height / 2;
-    this.r = 12;
+    this.x = 20;
+    this.y = 20;
+    this.r = 102;
 
     // Speed
     this.Speed = 1;
@@ -40,7 +40,7 @@ class PacMan {
     this.Foodfitness = 0;
   }
 
-  // Create a copy of this bird
+  // Create a copy of this Pacman
   copy() {
     return new PacMan(this.brain);
   }

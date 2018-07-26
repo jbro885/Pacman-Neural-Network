@@ -1,42 +1,16 @@
-
-
-// How big is the population
-let totalPopulation = 1;
-// All active birds (not yet collided with pipe)
-let activeBirds = [];
-// All birds for any given population
-let allBirds = [];
 // Pipes
 let pipes = [];
 // A frame counter to determine when to add a pipe
 let counter = 0;
-
-
-
 
 // Training or just showing the current best
 let runBest = false;
 let runBestButton;
 
 
-// Toggle the state of the simulation
-// function toggleState() {
-//   runBest = !runBest;
-//   // Show the best bird
-//   if (runBest) {
-//     resetGame();
-//     runBestButton.html('continue training');
-//     // Go train some more
-//   } else {
-//     nextGeneration();
-//     runBestButton.html('run best');
-//   }
-// }
-
-
-
 function draw() {
   Field();
+  
 
   // Should we speed up cycles per frame
   let cycles = speedSlider.value();
@@ -53,63 +27,43 @@ function draw() {
     //   }
     // }
     // Are we just running the best bird
-    if (runBest) {
-      bestBird.think(pipes);
-      bestBird.update();
-      for (let j = 0; j < pipes.length; j++) {
-        // Start over, bird hit pipe
-        if (pipes[j].hits(bestBird)) {
-          resetGame();
-          break;
-        }
-      }
 
-      if (bestBird.bottomTop()) {
-        resetGame();
-      }
-      // Or are we running all the active birds
-    } else {
-      for (let i = activeBirds.length - 1; i >= 0; i--) {
-        let bird = activeBirds[i];
-        // Bird uses its brain!
-        bird.think(pipes);
-        bird.update();
+      for (let i = activePacs.length - 1; i >= 0; i--) {
+        let PacMan = activePacs[i];
+        // Pacman uses its brain!
+        PacMan.think(Ghost);
+        PacMan.update();
 
         // Check all the pipes
         // for (let j = 0; j < pipes.length; j++) {
         //   // It's hit a pipe
-        //   if (pipes[j].hits(activeBirds[i])) {
+        //   if (pipes[j].hits(activePacs[i])) {
         //     // Remove this bird
-        //     activeBirds.splice(i, 1);
+        //     activePacs.splice(i, 1);
         //     break;
         //   }
         // }
 
-        if (bird.bottomTop()) {
-          activeBirds.splice(i, 1);
-        }
-
       }
-    }
+
 
     // Add a new pipe every so often
-    if (counter % 75 == 0) {
-      pipes.push(new Ghost());
-    }
+    // if (counter % 75 == 0) {
+    //   pipes.push(new Ghost());
+    // }
     counter++;
   }
 
   // What is highest score of the current population
   let tempHighScore = 0;
-  // If we're training
-  if (!runBest) {
+
     // Which is the best bird?
     let tempBestBird = null;
-    for (let i = 0; i < activeBirds.length; i++) {
-      let s = activeBirds[i].score;
+    for (let i = 0; i < activePacs.length; i++) {
+      let s = activePacs[i].score;
       if (s > tempHighScore) {
         tempHighScore = s;
-        tempBestBird = activeBirds[i];
+        tempBestBird = activePacs[i];
       }
     }
 
@@ -118,13 +72,7 @@ function draw() {
       highScore = tempHighScore;
       bestBird = tempBestBird;
     }
-  } else {
-    // Just one bird, the best one so far
-    tempHighScore = bestBird.score;
-    if (tempHighScore > highScore) {
-      highScore = tempHighScore;
-    }
-  }
+
 
   // Update DOM Elements
   highScoreSpan.html(tempHighScore);
@@ -135,15 +83,4 @@ function draw() {
     // pipes[i].show();
   }
 
-  // if (runBest) {
-  //   bestBird.show();
-  // } else {
-  //   for (let i = 0; i < activeBirds.length; i++) {
-  //     activeBirds[i].show();
-  //   }
-  //   // If we're out of birds go to the next generation
-  //   if (activeBirds.length == 0) {
-  //     nextGeneration();
-  //   }
-  // }
 }

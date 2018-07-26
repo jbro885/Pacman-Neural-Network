@@ -9,6 +9,12 @@ let allTimeHighScoreSpan;
 // All time high score
 let highScore = 0;
 
+// How big is the population
+let totalPopulation = 10;
+// All active Pacmans (not yet collided with ghost)
+let activePacs = [];
+// All Pacmans for any given population
+let allPacs = [];
 
 
 function setup() {
@@ -20,13 +26,12 @@ function setup() {
   speedSpan = select('#speed');
   highScoreSpan = select('#hs');
   allTimeHighScoreSpan = select('#ahs');
-  runBestButton = select('#best');
-  runBestButton.mousePressed(toggleState);
+
 
   // Create a population
   for (let i = 0; i < totalPopulation; i++) {
-    let bird = new PacMan();
-    activeBirds[i] = bird;
-    allBirds[i] = bird;
+    let Pac = new PacMan();
+    activePacs[i] = Pac;
+    allPacs[i] = Pac;
   }
 }
