@@ -5,9 +5,6 @@
 function resetGame() {
   counter = 0;
   // Resetting best bird score to 0
-  if (bestBird) {
-    bestBird.score = 0;
-  }
   pipes = [];
 }
 
@@ -22,7 +19,7 @@ function nextGeneration() {
   allPacs = activePacs.slice();
 }
 
-// Generate a new population of birds
+// Generate a new population of Pacmans
 function generate(oldPacs) {
   let newPacs = [];
   for (let i = 0; i < oldPacs.length; i++) {

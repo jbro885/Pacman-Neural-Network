@@ -10,7 +10,7 @@ let runBestButton;
 
 function draw() {
   Field();
-  
+
 
   // Should we speed up cycles per frame
   let cycles = speedSlider.value();
@@ -34,15 +34,15 @@ function draw() {
         PacMan.think(Ghost);
         PacMan.update();
 
-        // Check all the pipes
-        // for (let j = 0; j < pipes.length; j++) {
-        //   // It's hit a pipe
-        //   if (pipes[j].hits(activePacs[i])) {
-        //     // Remove this bird
-        //     activePacs.splice(i, 1);
-        //     break;
-        //   }
-        // }
+          // It's hit a Rong Field
+          //pipes[j].hits(activePacs[i])
+          if (FieldData[PacMan.cy()][PacMan.cx()] === 1) {
+            // Remove this bird
+            // console.log("hit!");
+            activePacs.splice(i, 1);
+            break;
+          }
+
 
       }
 
@@ -78,9 +78,11 @@ function draw() {
   highScoreSpan.html(tempHighScore);
   allTimeHighScoreSpan.html(highScore);
 
-  // Draw everything!
-  for (let i = 0; i < pipes.length; i++) {
-    // pipes[i].show();
+  for (let e = 0; e < activePacs.length; e++) {
+    activePacs[e].show();
   }
-
+  // If we're out of birds go to the next generation
+  if (activePacs.length == 0) {
+    nextGeneration();
+  }
 }

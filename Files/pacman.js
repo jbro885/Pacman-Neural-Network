@@ -13,13 +13,21 @@ function mutate(x) {
 
 class PacMan {
   constructor(brain) {
-    // position and size of bird
-    this.x = 20;
-    this.y = 20;
-    this.r = 102;
+    // position and size of start Pacman
+    this.x = 13.5;
+    this.y = 23;
+    this.r = 10;
+
+    //-1 wegen 0
+    this.lines = 30;
+    this.columnes = 27;
+
+    this.fieldx = this.x;
+    this.fieldy = this.y;
+    this.fieldr = this.r;
 
     // Speed
-    this.Speed = 1;
+    this.Speed = 0.02;
 
     // Is this a copy of another Bird or a new one?
     // The Neural Network is Pacmans's "brain"
@@ -47,8 +55,9 @@ class PacMan {
 
   // Display the Pacman
   show() {
+    // console.log("Show() Run");
     fill(255, 240, 102);
-    ellipse(this.x, this.y, this.r * 2, this.r * 2);
+    ellipse(this.x*25+(12.5-this.r)+this.r, this.y*25+(12.5-this.r)+this.r, this.r * 2, this.r * 2);
   }
 
   // This is the key function now that decides
@@ -86,9 +95,10 @@ class PacMan {
 
   //Pacman
       // x position
-      inputs[8] = map(closest.x, this.x, width, 0, 1);
+      inputs[8] = map(this.x, 0, this.columnes, 0, 1);
       // y position
-      inputs[9] = map(closest.top, 0, height, 0, 1);
+      inputs[9] = map(this.y, 0, this.lines, 0, 1);
+      console.log(this.y);
 
   //Field Infromations
       // uper field
@@ -111,7 +121,7 @@ class PacMan {
 
       // Get the outputs from the network
       let action = this.brain.predict(inputs);
-      console.log("action= "+action);
+      // console.log("action= "+action);
 
 
   }
@@ -132,7 +142,7 @@ class PacMan {
   update() {
     // this.Speed += this.gravity;
     // this.velocity *= 0.9;
-var directonstate = 0;
+var directonstate = 3;
 
     if (directonstate === 0) {
       //Up
@@ -152,5 +162,11 @@ var directonstate = 0;
 
     // // Every frame it is alive increases the score
     // this.score++;
+  }
+  cx() {
+    return Math.round(this.x);
+  }
+  cy() {
+    return Math.round(this.y);
   }
 }
