@@ -35,7 +35,7 @@ class PacMan {
     //   this.brain = brain.copy();
     //   this.brain.mutate(mutate);
     // } else {
-      this.brain = new NeuralNetwork(16, 32, 2);
+      this.brain = new NeuralNetwork(16, 32, 4);
     // }
 
     // Score is how many frames it's been alive
@@ -71,57 +71,86 @@ class PacMan {
       var closest = 1;
   //Blinky
       // x position
-      inputs[0] = map(closest.x, this.x, width, 0, 1);
+      inputs[0] = 1;
       // y position
-      inputs[1] = map(closest.top, 0, height, 0, 1);
+      inputs[1] = 1;
 
   //Pinky
       // x position
-      inputs[2] = map(closest.x, this.x, width, 0, 1);
+      inputs[2] = 1;
       // y position
-      inputs[3] = map(closest.top, 0, height, 0, 1);
+      inputs[3] = 1;
 
   //Inky
       // x position
-      inputs[4] = map(closest.x, this.x, width, 0, 1);
+      inputs[4] = 1;
       // y position
-      inputs[5] = map(closest.top, 0, height, 0, 1);
+      inputs[5] = 1;
 
   //Clyde
       // x position
-      inputs[6] = map(closest.x, this.x, width, 0, 1);
+      inputs[6] = 1;
       // y position
-      inputs[7] = map(closest.top, 0, height, 0, 1);
+      inputs[7] = 1;
 
   //Pacman
       // x position
-      inputs[8] = map(this.x, 0, this.columnes, 0, 1);
+      inputs[8] = 1;
       // y position
-      inputs[9] = map(this.y, 0, this.lines, 0, 1);
-      console.log(this.y);
+      inputs[9] = 1;
 
   //Field Infromations
+      let iv3 = Math.round(this.x);
+      let iv4 = Math.round(this.y);
+
       // uper field
-      inputs[10] = map(closest.x, this.x, width, 0, 1);
+      inputs[10] = FieldData[iv4-1][iv3];
       // lower field
-      inputs[11] = map(closest.x, this.x, width, 0, 1);
+      inputs[11] = FieldData[iv4+1][iv3];
       // Left field
-      inputs[12] = map(closest.x, this.x, width, 0, 1);
+      inputs[12] = FieldData[iv4][iv3-1];
       // Right field
-      inputs[13] = map(closest.x, this.x, width, 0, 1);
+      inputs[13] = FieldData[iv4][iv3+1];
+      // console.log("up: "+inputs[10]);
+      // console.log("low: "+inputs[11]);
+      // console.log("l: "+inputs[12]);
+      // console.log("r: "+inputs[13]);
 
   //Position of Dot
       // x position
-      inputs[14] = map(closest.x, this.x, width, 0, 1);
+      inputs[14] = 1;
       // y position
-      inputs[15] = map(closest.top, 0, height, 0, 1);
+      inputs[15] = 1;
 
 
 
-
+      // console.log(inputs);
       // Get the outputs from the network
-      let action = this.brain.predict(inputs);
+      var action = this.brain.predict(inputs);
       // console.log("action= "+action);
+
+      var directonstate = Math.max(action[0], action[1], action[2], action[3]);
+      if (directonstate === action[0]) {
+        //Up
+        this.y -= this.Speed;
+        console.log("up");
+      } else if (directonstate === action[1]) {
+        //Down
+        this.y += this.Speed;
+        console.log("Down");
+      } else if (directonstate === action[2]) {
+        //left
+        this.x -= this.Speed;
+        console.log("Left");
+      } else if (directonstate === action[3]) {
+        //right
+        this.x += this.Speed;
+        console.log("Right");
+        console.log(this.Speed);
+      } else {
+        console.log("Keine Richtung definiert.");
+      }
+
 
 
   }
@@ -142,23 +171,27 @@ class PacMan {
   update() {
     // this.Speed += this.gravity;
     // this.velocity *= 0.9;
-var directonstate = 3;
 
-    if (directonstate === 0) {
-      //Up
-      this.y -= this.Speed;
-    } else if (directonstate === 1) {
-      //Down
-      this.y += this.Speed;
-    } else if (directonstate === 2) {
-      //left
-      this.x -= this.Speed;
-    } else if (directonstate === 3) {
-      //right
-      this.x += this.Speed;
-    } else {
-      alert("Keine Richtung definiert.");
-    }
+
+
+// var directonstate = 3;
+//
+//     if (directonstate === 0) {
+//       //Up
+//       this.y -= this.Speed;
+//     } else if (directonstate === 1) {
+//       //Down
+//       this.y += this.Speed;
+//     } else if (directonstate === 2) {
+//       //left
+//       this.x -= this.Speed;
+//     } else if (directonstate === 3) {
+//       //right
+//       this.x += this.Speed;
+//     } else {
+//       alert("Keine Richtung definiert.");
+//     }
+
 
     // // Every frame it is alive increases the score
     // this.score++;
