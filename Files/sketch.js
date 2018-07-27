@@ -7,6 +7,9 @@ let counter = 0;
 let runBest = false;
 let runBestButton;
 
+var actioinHistory = [0,1,2,3];
+
+
 
 
 function draw() {
@@ -66,6 +69,14 @@ function draw() {
             cIsSx = PacMan.cx();
             cIsSy = PacMan.cy();
           }
+
+          // console.log(actioinHistory);
+          if (actioinHistory[0] === actioinHistory[2] && actioinHistory[1] === actioinHistory[3] && actioinHistory[0] != actioinHistory[1]) {
+            console.warn("ouu shit rip");
+            activePacs.splice(i, 1);
+            break;
+          }
+
       }
 
 
@@ -73,8 +84,8 @@ function draw() {
     // if (counter % 75 == 0) {
     //   pipes.push(new Ghost());
     // }
-      counter++;
 
+    console.log(counter);
 
   }
 
