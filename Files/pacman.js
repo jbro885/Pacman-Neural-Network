@@ -14,7 +14,7 @@ function mutate(x) {
 class PacMan {
   constructor(brain) {
     // position and size of start Pacman
-    this.x = 12; //13.5
+    this.x = 13; //13.5
     this.y = 23;  //23
     this.r = 10;
 
@@ -27,7 +27,7 @@ class PacMan {
     this.fieldr = this.r;
 
     // Speed
-    this.Speed = 0.5;
+    this.Speed = 0.1;
 
 
 
@@ -38,7 +38,7 @@ class PacMan {
     //   this.brain = brain.copy();
     //   this.brain.mutate(mutate);
     // } else {
-      this.brain = new NeuralNetwork(9, 16, 1);
+      this.brain = new NeuralNetwork(9, 64, 1);
     // }
 
     // Score is how many frames it's been alive
@@ -108,6 +108,7 @@ class PacMan {
       // console.log(this.y);
 
 
+
       // uper field
       if (FieldData[iv4-1][iv3] == 1) {
         inputs[0] = 0;
@@ -116,14 +117,20 @@ class PacMan {
       } else {
         inputs[0] = 1;
       }
+
       // uper2 field
-      if (FieldData[iv4-2][iv3] == 1) {
-        inputs[1] = 0;
-      } else if (FieldData[iv4-2][iv3] == 3) {
-        inputs[1] = 0.5;
+      if (iv4 >= 2) {
+        if (FieldData[iv4-2][iv3] == 1) {
+          inputs[1] = 0;
+        } else if (FieldData[iv4-2][iv3] == 3) {
+          inputs[1] = 0.5;
+        } else {
+          inputs[1] = 1;
+        }
       } else {
-        inputs[1] = 1;
+        inputs[1] = 0;
       }
+
       // lower field
       if (FieldData[iv4+1][iv3] == 1) {
         inputs[2] = 0;
@@ -132,14 +139,21 @@ class PacMan {
       } else {
         inputs[2] = 1;
       }
+
       // lower2 field
-      if (FieldData[iv4+2][iv3] == 1) {
-        inputs[3] = 0;
-      } else if (FieldData[iv4+2][iv3] == 3) {
-        inputs[3] = 0.5;
+      if (iv4 > FieldData.length-1) {
+        if (FieldData[iv4+2][iv3] == 1) {
+          inputs[3] = 0;
+        } else if (FieldData[iv4+2][iv3] == 3) {
+          inputs[3] = 0.5;
+        } else {
+          inputs[3] = 1;
+        }
       } else {
-        inputs[3] = 1;
+        inputs[3] = 0;
       }
+
+
       // Left field
       if (FieldData[iv4][iv3-1] == 1) {
         inputs[4] = 0;
@@ -148,13 +162,18 @@ class PacMan {
       } else {
         inputs[4] = 1;
       }
-      // Left2 field
-      if (FieldData[iv4][iv3-2] == 1) {
-        inputs[5] = 0;
-      } else if (FieldData[iv4][iv3-2] == 3) {
-        inputs[5] = 0.5;
+
+      if (iv3 >= 2) {
+        // Left2 field
+        if (FieldData[iv4][iv3-2] == 1) {
+          inputs[5] = 0;
+        } else if (FieldData[iv4][iv3-2] == 3) {
+          inputs[5] = 0.5;
+        } else {
+          inputs[5] = 1;
+        }
       } else {
-        inputs[5] = 1;
+        inputs[5] = 0;
       }
       // Right field
       if (FieldData[iv4][iv3+1] == 1) {
@@ -164,13 +183,18 @@ class PacMan {
       } else {
         inputs[6] = 1;
       }
-      // Right2 field
-      if (FieldData[iv4][iv3+2] == 1) {
-        inputs[7] = 0;
-      } else if (FieldData[iv4][iv3+2] == 3) {
-        inputs[7] = 0.5;
+
+      if (iv3 > FieldData[0].length-1) {
+        // Right2 field
+        if (FieldData[iv4][iv3+2] == 1) {
+          inputs[7] = 0;
+        } else if (FieldData[iv4][iv3+2] == 3) {
+          inputs[7] = 0.5;
+        } else {
+          inputs[7] = 1;
+        }
       } else {
-        inputs[7] = 1;
+        inputs[7] = 0;
       }
 
       // Current
