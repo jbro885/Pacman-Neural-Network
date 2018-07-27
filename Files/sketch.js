@@ -46,7 +46,7 @@ function draw() {
 
 
 
-          console.log(PacMan.directonstate());
+          // console.log(PacMan.directonstate());
           //Reamove if stay still
           var cIsS = 0;
           var cIsSx = 0;
@@ -62,6 +62,7 @@ function draw() {
               break;
             }
           } else {
+            cIsS = 0;
             cIsSx = PacMan.cx();
             cIsSy = PacMan.cy();
           }
@@ -72,7 +73,9 @@ function draw() {
     // if (counter % 75 == 0) {
     //   pipes.push(new Ghost());
     // }
-    counter++;
+      counter++;
+
+
   }
 
   // What is highest score of the current population

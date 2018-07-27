@@ -14,8 +14,8 @@ function mutate(x) {
 class PacMan {
   constructor(brain) {
     // position and size of start Pacman
-    this.x = 13.5;
-    this.y = 23;
+    this.x = 6; //13.5
+    this.y = 5;  //23
     this.r = 10;
 
     //-1 wegen 0
@@ -27,7 +27,7 @@ class PacMan {
     this.fieldr = this.r;
 
     // Speed
-    this.Speed = 0.05;
+    this.Speed = 1;
 
     // Is this a copy of another Bird or a new one?
     // The Neural Network is Pacmans's "brain"
@@ -35,7 +35,7 @@ class PacMan {
     //   this.brain = brain.copy();
     //   this.brain.mutate(mutate);
     // } else {
-      this.brain = new NeuralNetwork(17, 32, 4);
+      this.brain = new NeuralNetwork(5, 8, 4);
     // }
 
     // Score is how many frames it's been alive
@@ -69,35 +69,35 @@ class PacMan {
       let inputs = [];
 
       var closest = 1;
-  //Blinky
-      // x position
-      inputs[0] = 1;
-      // y position
-      inputs[1] = 1;
-
-  //Pinky
-      // x position
-      inputs[2] = 1;
-      // y position
-      inputs[3] = 1;
-
-  //Inky
-      // x position
-      inputs[4] = 1;
-      // y position
-      inputs[5] = 1;
-
-  //Clyde
-      // x position
-      inputs[6] = 1;
-      // y position
-      inputs[7] = 1;
-
-  //Pacman
-      // x position
-      inputs[8] = 1;
-      // y position
-      inputs[9] = 1;
+  // //Blinky
+  //     // x position
+  //     inputs[0] = 1;
+  //     // y position
+  //     inputs[1] = 1;
+  //
+  // //Pinky
+  //     // x position
+  //     inputs[2] = 1;
+  //     // y position
+  //     inputs[3] = 1;
+  //
+  // //Inky
+  //     // x position
+  //     inputs[4] = 1;
+  //     // y position
+  //     inputs[5] = 1;
+  //
+  // //Clyde
+  //     // x position
+  //     inputs[6] = 1;
+  //     // y position
+  //     inputs[7] = 1;
+  //
+  // //Pacman
+  //     // x position
+  //     inputs[8] = 1;
+  //     // y position
+  //     inputs[9] = 1;
 
   //Field Infromations
       let iv3 = Math.round(this.x);
@@ -105,55 +105,86 @@ class PacMan {
       let iv4 = Math.round(this.y);
       // console.log(this.y);
 
-      // uper field
-      inputs[10] = FieldData[iv4-1][iv3] / 10;
-      // lower field
-      inputs[11] = FieldData[iv4+1][iv3] / 10;
-      // Left field
-      inputs[12] = FieldData[iv4][iv3-1] / 10;
-      // Right field
-      inputs[13] = FieldData[iv4][iv3+1] / 10;
-      // Right field
-      inputs[14] = FieldData[iv4][iv3] / 10;
-      console.log("up: "+inputs[10]);
-      console.log("low: "+inputs[11]);
-      console.log("l: "+inputs[12]);
-      console.log("r: "+inputs[13]);
-      console.log("current: "+inputs[14]);
 
-  //Position of Dot
-      // x position
-      inputs[15] = 1;
-      // y position
-      inputs[16] = 1;
+      // uper field
+      if (FieldData[iv4-1][iv3] == 1) {
+        inputs[0] = 0;
+      } else {
+        inputs[0] = 1;
+      }
+      // lower field
+      if (FieldData[iv4+1][iv3] == 1) {
+        inputs[1] = 0;
+      } else {
+        inputs[1] = 1;
+      }
+      // Left field
+      if (FieldData[iv4][iv3-1] == 1) {
+        inputs[2] = 0;
+      } else {
+        inputs[2] = 1;
+      }
+      // Right field
+      if (FieldData[iv4][iv3+1] == 1) {
+        inputs[3] = 0;
+      } else {
+        inputs[3] = 1;
+      }
+
+      // Current
+      if (FieldData[iv4][iv3] == 4) {
+        inputs[4] = 1;
+      } else {
+        inputs[4] = 0;
+      }
+
+      // console.log("up: "+inputs[0]);
+      // console.log("low: "+inputs[1]);
+      // console.log("l: "+inputs[2]);
+      // console.log("r: "+inputs[3]);
+      // console.log("current: "+inputs[4]);
+
+  // //Position of Dot
+  //     // x position
+  //     inputs[15] = 1;
+  //     // y position
+  //     inputs[16] = 1;
 
 
 
       // console.log(inputs);
       // Get the outputs from the network
-      var action = this.brain.predict(inputs);
-      // console.log("action= "+action);
+        var action = this.brain.predict(inputs);
+
+        // console.log("action= "+action);
 
       var directonstate = this.directonstate(action);
-      if (directonstate === action[0]) {
+      var CodeOfdesisionBevore;
+      console.log(action);
+      console.log(CodeOfdesisionBevore);
+      if (directonstate === action[0] && CodeOfdesisionBevore != 0) {
         //Up
         this.y -= this.Speed;
         console.log("up");
-      } else if (directonstate === action[1]) {
+        CodeOfdesisionBevore = 0;
+      } else if (directonstate === action[1] && CodeOfdesisionBevore != 1) {
         //Down
         this.y += this.Speed;
         console.log("Down");
-      } else if (directonstate === action[2]) {
+        CodeOfdesisionBevore = 1;
+      } else if (directonstate === action[2] && CodeOfdesisionBevore != 2) {
         //left
         this.x -= this.Speed;
         console.log("Left");
-      } else if (directonstate === action[3]) {
+        CodeOfdesisionBevore = 2;
+      } else if (directonstate === action[3] && CodeOfdesisionBevore != 3) {
         //right
         this.x += this.Speed;
         console.log("Right");
+        CodeOfdesisionBevore = 3;
         // console.log(this.Speed);
       } else {
-        console.log("Keine Richtung definiert.");
+        alert("Keine Richtung definiert.");
       }
 
 
@@ -178,29 +209,12 @@ class PacMan {
     // this.Speed += this.gravity;
     // this.velocity *= 0.9;
 
-
-
-// var directonstate = 3;
-//
-//     if (directonstate === 0) {
-//       //Up
-//       this.y -= this.Speed;
-//     } else if (directonstate === 1) {
-//       //Down
-//       this.y += this.Speed;
-//     } else if (directonstate === 2) {
-//       //left
-//       this.x -= this.Speed;
-//     } else if (directonstate === 3) {
-//       //right
-//       this.x += this.Speed;
-//     } else {
-//       alert("Keine Richtung definiert.");
-//     }
-
-
+    if (FieldData[this.cy()][this.cx()] === 0) {
+      FieldData[this.cy()][this.cx()] = 3;
+      this.score++;
+      // alert("s=="+this.score);
+    }
     // // Every frame it is alive increases the score
-    // this.score++;
   }
   cx() {
     return Math.round(this.x);

@@ -10,7 +10,7 @@ let allTimeHighScoreSpan;
 let highScore = 0;
 
 // How big is the population
-let totalPopulation = 100;
+let totalPopulation = 1;
 // All active Pacmans (not yet collided with ghost)
 let activePacs = [];
 // All Pacmans for any given population
