@@ -1,15 +1,3 @@
-// Pipes
-let pipes = [];
-// A frame counter to determine when to add a pipe
-let counter = 0;
-
-// Training or just showing the current best
-let runBest = false;
-let runBestButton;
-
-var actioinHistory = [0,1,2,3];
-
-
 
 
 function draw() {
@@ -35,7 +23,7 @@ function draw() {
       for (let i = activePacs.length - 1; i >= 0; i--) {
         let PacMan = activePacs[i];
         // Pacman uses its brain!
-        PacMan.think(Ghost);
+        PacMan.think(FieldData);
         PacMan.update();
 
           // It's hit a Rong Field
@@ -93,20 +81,26 @@ function draw() {
   let tempHighScore = 0;
 
     // Which is the best bird?
-    let tempBestBird = null;
+    let tempBestPacMan = null;
     for (let i = 0; i < activePacs.length; i++) {
       let s = activePacs[i].score;
       if (s > tempHighScore) {
         tempHighScore = s;
-        tempBestBird = activePacs[i];
+        tempBestPacMan = activePacs[i];
       }
     }
 
     // Is it the all time high scorer?
     if (tempHighScore > highScore) {
       highScore = tempHighScore;
-      bestBird = tempBestBird;
+      bestPacMan = tempBestPacMan;
+    } else {
+    // Just one bird, the best one so far
+    tempHighScore = bestPacMan.score;
+    if (tempHighScore > highScore) {
+      highScore = tempHighScore;
     }
+  }
 
 
   // Update DOM Elements

@@ -39,12 +39,16 @@ function resetGame() {
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
   ];
   pipes = [];
+  if (bestPacMan) {
+  bestPacMan.score = 0;
+}
 }
 
 // Create the next generation
 function nextGeneration() {
   resetGame();
   // Normalize the fitness values 0-1
+  console.warn(allPacs);
   normalizeFitness(allPacs);
   // Generate a new set of birds
   activePacs = generate(allPacs);
@@ -65,6 +69,7 @@ function generate(oldPacs) {
 
 // Normalize the fitness of all birds
 function normalizeFitness(Pacs) {
+  console.warn(Pacs);
   // Make score exponentially better?
   for (let i = 0; i < Pacs.length; i++) {
     Pacs[i].score = pow(Pacs[i].score, 2);
@@ -96,6 +101,8 @@ function poolSelection(Pacs) {
   // subtract a larger number towards zero
   while (r > 0) {
     r -= Pacs[index].fitness;
+     // alert(Pacs[index].score);
+     // alert(Pacs[index].fitness);
     // And move on to the next
     index += 1;
   }

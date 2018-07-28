@@ -14,8 +14,8 @@ function mutate(x) {
 class PacMan {
   constructor(brain) {
     // position and size of start Pacman
-    this.x = 10; //13.5
-    this.y = 10;  //23
+    this.x = 2; //13.5
+    this.y = 2;  //23
     this.r = 10;
 
     //-1 wegen 0
@@ -27,7 +27,7 @@ class PacMan {
     this.fieldr = this.r;
 
     // Speed
-    this.Speed = 0.1;
+    this.Speed = 1;
 
 
 
@@ -38,7 +38,7 @@ class PacMan {
     //   this.brain = brain.copy();
     //   this.brain.mutate(mutate);
     // } else {
-      this.brain = new NeuralNetwork(7, 32, 4);
+      this.brain = new NeuralNetwork(7, 32, 32, 4);
     // }
 
     // Score is how many frames it's been alive
@@ -65,7 +65,7 @@ class PacMan {
 
   // This is the key function now that decides
   // if it should jump or not jump!
-  think(Ghost) {
+  think(FieldData) {
 
 
       // Now create the inputs to the neural network
@@ -113,7 +113,7 @@ class PacMan {
       if (FieldData[iv4-1][iv3] == 1) {
         inputs[0] = 0;
       } else if (FieldData[iv4-1][iv3] == 3) {
-        inputs[0] = 1
+        inputs[0] = 0.5;
       } else {
         inputs[0] = 1;
       }
@@ -135,7 +135,7 @@ class PacMan {
       if (FieldData[iv4+1][iv3] == 1) {
         inputs[1] = 0;
       } else if (FieldData[iv4+1][iv3] == 3) {
-        inputs[1] = 1
+        inputs[1] = 0.5;
       } else {
         inputs[1] = 1;
       }
@@ -158,7 +158,7 @@ class PacMan {
       if (FieldData[iv4][iv3-1] == 1) {
         inputs[2] = 0;
       } else if (FieldData[iv4][iv3-1] == 3) {
-        inputs[2] = 1
+        inputs[2] = 0.5;
       } else {
         inputs[2] = 1;
       }
@@ -179,7 +179,7 @@ class PacMan {
       if (FieldData[iv4][iv3+1] == 1) {
         inputs[3] = 0;
       } else if (FieldData[iv4][iv3+1] == 3) {
-        inputs[3] = 1
+        inputs[3] = 0.5;
       } else {
         inputs[3] = 1;
       }
@@ -209,6 +209,7 @@ class PacMan {
       inputs[5] = map(iv3, 0, 29, 0, 1);
       // inputs[6] = 1;
       inputs[6] = map(iv4, 0, 33, 0, 1);
+
 
       // console.log("up: "+inputs[0]);
       // console.log("low: "+inputs[1]);

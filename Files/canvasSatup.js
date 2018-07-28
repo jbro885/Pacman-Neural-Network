@@ -1,13 +1,5 @@
 //Setup canvas
 
-// Interface elements
-let speedSlider;
-let speedSpan;
-let highScoreSpan;
-let allTimeHighScoreSpan;
-
-// All time high score
-let highScore = 0;
 
 // How big is the population
 let totalPopulation = 1;
@@ -15,6 +7,35 @@ let totalPopulation = 1;
 let activePacs = [];
 // All Pacmans for any given population
 let allPacs = [];
+
+// All time high score
+let highScore = 0;
+
+
+// Pipes
+let pipes = [];
+// A frame counter to determine when to add a pipe
+let counter = 0;
+
+// Training or just showing the current best
+let runBest = false;
+let runBestButton;
+
+var actioinHistory = [0,1,2,3];
+
+// Interface elements
+let speedSlider;
+let speedSpan;
+let highScoreSpan;
+let allTimeHighScoreSpan;
+
+
+
+
+
+
+
+
 
 
 function setup() {
