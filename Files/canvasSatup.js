@@ -7,6 +7,7 @@ let totalPopulation = 1;
 let activePacs = [];
 // All Pacmans for any given population
 let allPacs = [];
+let EverPacs = [];
 
 // All time high score
 let highScore = 0;

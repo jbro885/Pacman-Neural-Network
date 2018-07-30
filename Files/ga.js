@@ -48,20 +48,21 @@ function resetGame() {
 function nextGeneration() {
   resetGame();
   // Normalize the fitness values 0-1
-  console.warn(allPacs);
+  console.warn(EverPacs);
   normalizeFitness(allPacs);
+  EverPacs.push(allPacs);
   // Generate a new set of birds
   activePacs = generate(allPacs);
   // Copy those birds to another array
-  allPacs = activePacs.slice();
+  allPacs = activePacs.slice(-1);
 }
 
 // Generate a new population of Pacmans
-function generate(oldPacs) {
+function generate(EverPacs) {
   let newPacs = [];
-  for (let i = 0; i < oldPacs.length; i++) {
+  for (let i = 0; i < EverPacs.length; i++) {
     // Select a bird based on fitness
-    let Pac = poolSelection(oldPacs);
+    let Pac = poolSelection(EverPacs);
     newPacs[i] = Pac;
   }
   return newPacs;
@@ -100,6 +101,7 @@ function poolSelection(Pacs) {
   // Higher probabilities will be more likely to be fixed since they will
   // subtract a larger number towards zero
   while (r > 0) {
+    console.warn(Pacs[index].fitness);
     r -= Pacs[index].fitness;
      // alert(Pacs[index].score);
      // alert(Pacs[index].fitness);

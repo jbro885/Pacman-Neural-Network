@@ -34,12 +34,13 @@ class PacMan {
 
     // Is this a copy of another Bird or a new one?
     // The Neural Network is Pacmans's "brain"
-    // if (brain instanceof NeuralNetwork) {
-    //   this.brain = brain.copy();
-    //   this.brain.mutate(mutate);
-    // } else {
-      this.brain = new NeuralNetwork(7, 32, 32, 4);
-    // }
+    if (brain instanceof NeuralNetwork) {
+      this.brain = brain.copy();
+      this.brain.mutate(mutate);
+    } else {
+      this.brain = new NeuralNetwork(7, 32, 4);
+      // this.brain = new NeuralNetwork(7, 32, 32, 4);
+    }
 
     // Score is how many frames it's been alive
     this.score = 0;
