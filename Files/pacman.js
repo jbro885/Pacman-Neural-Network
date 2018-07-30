@@ -50,6 +50,8 @@ class PacMan {
     this.Foodscore = 0;
     // Foodfitness is normalized version of Foodscore
     this.Foodfitness = 0;
+    // Give Generation Number
+    this.GenerationNumber = GenerationNumber++;
   }
 
   // Create a copy of this Pacman
@@ -229,8 +231,8 @@ class PacMan {
       // console.log(inputs);
       // Get the outputs from the network
         var action = this.brain.predict(inputs);
-        console.log(action);
-        console.log(inputs);
+        // console.log(action);
+        // console.log(inputs);
         actioinHistory[0] = actioinHistory[1];
         actioinHistory[1] = actioinHistory[2];
         actioinHistory[2] = actioinHistory[3];
