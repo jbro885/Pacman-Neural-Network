@@ -318,7 +318,6 @@ class PacMan {
       counter++;
       // alert("s=="+this.score);
     }
-    // // Every frame it is alive increases the score
   }
   cx() {
     return Math.round(this.x);
