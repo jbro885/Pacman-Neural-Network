@@ -61,6 +61,6 @@ function setup() {
     let Pac = new PacMan();
     activePacs[i] = Pac;
     allPacs[i] = Pac;
+    EverPacs[i] = Pac;
   }
-  EverPacs[0] = allPacs;
 }

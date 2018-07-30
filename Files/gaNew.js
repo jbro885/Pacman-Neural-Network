@@ -52,65 +52,54 @@ function nextGeneration() {
   resetGame();
   //Push to allPacs Hisotry (Ever Pacs)
   //Newest at the Last Position
-  if (EverPacs.length < 75) {
-    EverPacs.push(allPacs);
-  } else {
-    EverPacs.push(allPacs);
-    EverPacs.splice(0,1)
+  for (let i = 0; i < allPacs.length; i++) {
+    if (EverPacs.length < 75) {
+      EverPacs.push(allPacs[i]);
+    } else {
+      EverPacs.push(allPacs[i]);
+      EverPacs.splice(0,1)
+    }
   }
 
+  normalizeALLScores(EverPacs);
 
-  // Normalize the fitness values 0-1
-  normalizeFitness(EverPacs);
-  // Generate a new set of birds
   activePacs = generate(EverPacs);
   // Copy those birds to another array
-  console.warn(activePacs);
-  allPacs = activePacs.slice();
+  EverPacs = activePacs.slice();
+
 }
+
+//get fitness in 1 and o
+//test with exponential
+function normalizeALLScores(EvPac) {
+  let tempScoreSum = 0;
+  //Get Sum of fitness * fitness
+  for (let i = 0; i < EvPac.length; i++) {
+    tempScoreSum = tempScoreSum + pow(EvPac[i].score, 2);
+  }
+  //get number betuene 0,1
+  for (var p = 0; p < EvPac.length; p++) {
+    EvPac[p].fitness = EvPac[p].score / tempScoreSum;
+  }
+}
+
+
 
 // Generate a new population of Pacmans
-function generate(EverPacs) {
-  let newPacs = [];
-  // for (let i = 0; i < EverPacs.length; i++) {
-    // Select a bird based on fitness
-    let Pac = poolSelection(EverPacs);
-    newPacs = Pac;
-  // }
-  return newPacs;
-}
-
-// Normalize the fitness of all birds
-function normalizeFitness(Pacs) {
-  let sum = 0;
-  // Make score exponentially better?
-  for (var p = 0; p < Pacs.length; p++) {
-    for (let i = 0; i < Pacs[p].length; i++) {
-      // console.warn(Pacs[p][i].score);
-      Pacs[p][i].score = pow(Pacs[p][i].score, 2);
-    }
+function generate(EvPac) {
+  let NewPacs = [];
+  for (let i = 0; i < totalPopulation; i++) {
+    // Select a best Pacman based on fitness
+    let BestPac = SelectTheBestOne(EvPac);
+    NewPacs[i] = BestPac;
   }
-
-    for (var p = 0; p < Pacs.length; p++) {
-    for (let i = 0; i < Pacs[p].length; i++) {
-    // Add up all the scores
-      sum += Pacs[p][i].score;
-    }
-  }
-
-  for (var p = 0; p < Pacs.length; p++) {
-    // Divide by the sum
-    for (let i = 0; i < Pacs[p].length; i++) {
-      Pacs[p][i].fitness = Pacs[p][i].score / sum;
-      // console.log("Pacs["+p+"]["+i+"] "+Pacs[p][i].fitness);
-    }
-  }
+  return NewPacs;
 }
 
 
-// An algorithm for picking one bird from an array
+// An algorithm for picking the Best from an array
 // based on fitness
-function poolSelection(Pacs) {
+function SelectTheBestOne(EvPac) {
   // Start at 0
   let index = 0;
 
@@ -121,24 +110,15 @@ function poolSelection(Pacs) {
   // Higher probabilities will be more likely to be fixed since they will
   // subtract a larger number towards zero
   while (r > 0) {
-    for (var p = 0; p < Pacs[index].length; p++) {
-    console.warn(p);
-    console.warn(index);
-    console.warn(Pacs);
-    console.warn(EverPacs);
-    console.warn(Pacs[index][p].fitness);
-    r -= Pacs[index][p].fitness;
-     // alert(Pacs[index].score);
-     // alert(Pacs[index].fitness);
+    r -= EvPac[index].fitness;
     // And move on to the next
     index += 1;
   }
-}
 
   // Go back one
   index -= 1;
 
   // Make sure it's a copy!
   // (this includes mutation)
-  return Pacs[p-1][index].copy();
+  return EvPac[index].copy();
 }
