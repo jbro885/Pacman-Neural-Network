@@ -14,8 +14,8 @@ function mutate(x) {
 class PacMan {
   constructor(brain) {
     // position and size of start Pacman
-    this.x = 2; //13.5
-    this.y = 2;  //23
+    this.x = 15; //13.5
+    this.y = 15;  //23
     this.r = 10;
 
     //-1 wegen 0
