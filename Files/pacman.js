@@ -243,19 +243,19 @@ class PacMan {
       if (directonstate === 0) {
         //Up
         this.y -= this.Speed;
-        console.log("up");
+        // console.log("up");
       } else if (directonstate === 1) {
         //Down
         this.y += this.Speed;
-        console.log("Down");
+        // console.log("Down");
       } else if (directonstate === 2) {
         //left
         this.x -= this.Speed;
-        console.log("Left");
+        // console.log("Left");
       } else if (directonstate === 3) {
         //right
         this.x += this.Speed;
-        console.log("Right");
+        // console.log("Right");
         // console.log(this.Speed);
       } else {
         alert("Keine Richtung definiert.");

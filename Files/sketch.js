@@ -36,7 +36,7 @@ function draw() {
             cIsS++;
             if (cIsS >= 4) {
               // Remove this Pacman
-              console.log("Stand Still");
+              console.warn("Stand Still");
               cIsS = 0;
               activePacs.splice(i, 1);
               break;
@@ -49,7 +49,7 @@ function draw() {
 
           // console.log(actioinHistory);
           if (actioinHistory[0] === actioinHistory[2] && actioinHistory[1] === actioinHistory[3] && actioinHistory[0] != actioinHistory[1]) {
-            console.warn("ouu shit rip");
+            console.warn("Stand wiggeling");
             activePacs.splice(i, 1);
             break;
           }
@@ -62,7 +62,7 @@ function draw() {
     //   pipes.push(new Ghost());
     // }
 
-    console.log(counter);
+    // console.log(counter);
 
   }
 

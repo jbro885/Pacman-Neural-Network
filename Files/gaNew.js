@@ -53,7 +53,7 @@ function nextGeneration() {
   //Push to allPacs Hisotry (Ever Pacs)
   //Newest at the Last Position
   for (let i = 0; i < allPacs.length; i++) {
-    if (EverPacs.length < 75) {
+    if (EverPacs.length < 275) {
       EverPacs.push(allPacs[i]);
     } else {
       EverPacs.push(allPacs[i]);
@@ -131,8 +131,8 @@ function SelectTheBestOne(EvPac) {
     if (s > tempHScore) {
       tempHScore = s;
       BestPacMan = EvPac[i];
-      console.warn(i);
-      console.warn(BestPacMan);
+      // console.warn(i);
+      // console.warn(BestPacMan);
     }
   }
 
