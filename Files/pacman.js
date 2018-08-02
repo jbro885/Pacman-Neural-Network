@@ -14,8 +14,8 @@ function mutate(x) {
 class PacMan {
   constructor(brain) {
     // position and size of start Pacman
-    this.x = 2; //13.5
-    this.y = 2;  //23
+    this.x = 13; //13.5
+    this.y = 23;  //23
     this.r = 10;
 
     //-1 wegen 0
@@ -38,7 +38,7 @@ class PacMan {
       this.brain = brain.copy();
       this.brain.mutate(mutate);
     } else {
-      this.brain = new NeuralNetwork(7, 32, 4);
+      this.brain = new NeuralNetwork(5, 32, 4);
       // this.brain = new NeuralNetwork(7, 32, 32, 4);
     }
 
@@ -121,7 +121,7 @@ class PacMan {
         inputs[0] = 1;
       }
 
-      // uper2 field
+      // // uper2 field
       // if (iv4 >= 2) {
       //   if (FieldData[iv4-2][iv3] == 1) {
       //     inputs[1] = 0;
@@ -143,7 +143,7 @@ class PacMan {
         inputs[1] = 1;
       }
 
-      // // lower2 field
+      // // // lower2 field
       // if (iv4 > FieldData.length-1) {
       //   if (FieldData[iv4+2][iv3] == 1) {
       //     inputs[3] = 0;
@@ -202,16 +202,16 @@ class PacMan {
 
       // Current
       if (FieldData[iv4][iv3] == 4) {
-        inputs[4] = 0;
-      } else {
         inputs[4] = 1;
+      } else {
+        inputs[4] = 0;
       }
 
 
       // inputs[5] = 1;
-      inputs[5] = map(iv3, 0, 29, 0, 1);
+      // inputs[5] = map(iv3, 0, 29, 0, 1);
       // inputs[6] = 1;
-      inputs[6] = map(iv4, 0, 33, 0, 1);
+      // inputs[6] = map(iv4, 0, 33, 0, 1);
 
 
       // console.log("up: "+inputs[0]);
@@ -314,6 +314,11 @@ class PacMan {
 
     if (FieldData[this.cy()][this.cx()] === 0) {
       FieldData[this.cy()][this.cx()] = 3;
+      this.score++;
+      counter++;
+      // alert("s=="+this.score);
+    }
+    if (FieldData[this.cy()][this.cx()] === 4) {
       this.score++;
       counter++;
       // alert("s=="+this.score);

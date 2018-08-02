@@ -1,53 +1,60 @@
 //Movment of the Ghosts
-
 class Ghost {
-  // constructor() {
-  //
-  //   // How big is the empty space
-  //   let spacing = 125;
-  //   // Where is th center of the empty space
-  //   let centery = random(spacing, height - spacing);
-  //
-  //   // Top and bottom of pipe
-  //   this.top = centery - spacing / 2;
-  //   this.bottom = height - (centery + spacing / 2);
-  //   // Starts at the edge
-  //   this.x = width;
-  //   // Width of pipe
-  //   this.w = 80;
-  //   // How fast
-  //   this.speed = 6;
-  // }
-  //
-  // // Did this pipe hit a bird?
-  // hits(bird) {
-  //   if ((bird.y - bird.r) < this.top || (bird.y + bird.r) > (height - this.bottom)) {
-  //     if (bird.x > this.x && bird.x < this.x + this.w) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
-  //
-  // // Draw the pipe
-  // show() {
-  //   stroke(255);
-  //   fill(200);
-  //   rect(this.x, 0, this.w, this.top);
-  //   rect(this.x, height - this.bottom, this.w, this.bottom);
-  // }
-  //
-  // // Update the pipe
-  // update() {
-  //   this.x -= this.speed;
-  // }
-  //
-  // // Has it moved offscreen?
-  // offscreen() {
-  //   if (this.x < -this.w) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  construct() {
+    //Start Position
+    this.x = 13; //13.5
+    this.y = 23;  //23
+    this.r = 10;
+    // Speed
+    this.Speed = 1;
+  }
+  directionDecision(PacmanXCord, PacmanYCord) {
+    let thisX = Math.round(this.x);
+    let thisY = Math.round(this.y);
+
+
+
+
+    if (thisX - PacmanXCord < 0) {
+      this.x -= this.Speed;
+    } else if (thisX - PacmanXCord > 0) {
+      this.x += this.Speed;
+    } else if (thisX - PacmanXCord = 0) {
+      this.x = this.x;
+    } else {
+      alert("Keine Y Cordinate Definiert.")
+    }
+
+
+
+    if (thisY - PacmanYCord < 0) {
+      this.y -= this.Speed;
+    } else if (thisY - PacmanYCord > 0) {
+      this.y += this.Speed;
+    } else if (thisY - PacmanYCord = 0) {
+      this.y = this.y;
+    } else {
+      alert("Keine Y Cordinate Definiert.")
+    }
+  }
+  // Display the Pacman
+  show(name) {
+    if (name == "CLYDE" || name == 0) {
+      fill(254, 160, 1);
+    } else if (name == "BLINKY" || name == 1) {
+      fill(253, 35, 4);
+    } else if (name == "PINKY" || name == 2) {
+      fill(254, 178, 178);
+    } else if (name == "INKY" || name == 3) {
+      fill(0, 223, 223);
+    } else {
+      alert("Keinen Geist Ausgewählt");
+    }
+
+//Pff
+    ellipse(this.x*25+(12.5-this.r)+this.r, this.y*25+(12.5-this.r)+this.r, this.r * 2, this.r * 2);
+  }
+  update() {
+
+
 }

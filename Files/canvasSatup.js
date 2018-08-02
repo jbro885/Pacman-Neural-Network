@@ -37,6 +37,7 @@ let htmlGenCounter;
 
 let GenerationNumber = 1;
 
+let bestPacMan;
 
 
 
