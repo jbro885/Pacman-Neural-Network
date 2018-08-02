@@ -12,15 +12,25 @@ class Ghost {
     let thisX = Math.round(this.x);
     let thisY = Math.round(this.y);
 
-
+    let poUP = FieldData[thisX][thisY-1];
+    let poDown = FieldData[thisX][thisY+1];
+    let poLeft = FieldData[thisX-1][thisY];
+    let poRight = FieldData[thisX+1][thisY];
+    let poThis = FieldData[thisX][thisY];
 
 
     if (thisX - PacmanXCord < 0) {
-      this.x -= this.Speed;
+      if (poLeft != 1) {
+        this.x -= this.Speed;
+      }
     } else if (thisX - PacmanXCord > 0) {
-      this.x += this.Speed;
+      if (poRight != 1) {
+        this.x += this.Speed;
+      }
     } else if (thisX - PacmanXCord = 0) {
-      this.x = this.x;
+      if (poThis != 1) {
+        this.x = this.x;
+      }
     } else {
       alert("Keine Y Cordinate Definiert.")
     }
@@ -28,11 +38,17 @@ class Ghost {
 
 
     if (thisY - PacmanYCord < 0) {
-      this.y -= this.Speed;
+      if (poUp != 1) {
+        this.y -= this.Speed;
+      }
     } else if (thisY - PacmanYCord > 0) {
-      this.y += this.Speed;
+      if (poDown != 1) {
+        this.y += this.Speed;
+      }
     } else if (thisY - PacmanYCord = 0) {
-      this.y = this.y;
+      if (poThis != 1) {
+        this.y = this.y;
+      }
     } else {
       alert("Keine Y Cordinate Definiert.")
     }
