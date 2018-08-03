@@ -53,6 +53,13 @@ function draw() {
             activePacs.splice(i, 1);
             break;
           }
+          //Ghosts
+          for (var i = 0; i < Ghosts.length; i++) {
+            let G = Ghosts[i];
+            //Ghost
+            Ghost.update();
+          }
+
 
       }
 

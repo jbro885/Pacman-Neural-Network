@@ -39,7 +39,8 @@ let GenerationNumber = 1;
 
 let bestPacMan;
 
-
+//Ghosts
+let Ghosts;
 
 
 
@@ -56,6 +57,11 @@ function setup() {
   allTimeHighScoreSpan = select('#ahs');
   htmlGenCounter = select('#gen');
 
+//4 Ghost
+for (var i = 0; i <= 4; i++) {
+  let tempGhost = new Ghost();
+  Ghosts[i] = tempGhost;
+}
 
   // Create a population
   for (let i = 0; i < totalPopulation; i++) {

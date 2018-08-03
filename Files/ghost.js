@@ -1,6 +1,7 @@
 //Movment of the Ghosts
 class Ghost {
-  construct() {
+  alert("asd");
+  constructor() {
     //Start Position
     this.x = 13; //13.5
     this.y = 23;  //23
@@ -8,7 +9,7 @@ class Ghost {
     // Speed
     this.Speed = 1;
   }
-  directionDecision(PacmanXCord, PacmanYCord) {
+  directionDecision(FieldData) {
     let thisX = Math.round(this.x);
     let thisY = Math.round(this.y);
 
@@ -22,12 +23,16 @@ class Ghost {
     if (thisX - PacmanXCord < 0) {
       if (poLeft != 1) {
         this.x -= this.Speed;
+      } else if (poRight != 1) {
+        this.x += this.Speed;
       }
     } else if (thisX - PacmanXCord > 0) {
       if (poRight != 1) {
         this.x += this.Speed;
+      } else if (poLeft != 1) {
+        this.x -= this.Speed;
       }
-    } else if (thisX - PacmanXCord = 0) {
+    } else if ((thisX - PacmanXCord) == 0) {
       if (poThis != 1) {
         this.x = this.x;
       }
@@ -40,12 +45,16 @@ class Ghost {
     if (thisY - PacmanYCord < 0) {
       if (poUp != 1) {
         this.y -= this.Speed;
+      } else if (poDown != 1) {
+        this.y += this.Speed;
       }
     } else if (thisY - PacmanYCord > 0) {
       if (poDown != 1) {
         this.y += this.Speed;
+      } else if (poUp != 1) {
+        this.y -= this.Speed;
       }
-    } else if (thisY - PacmanYCord = 0) {
+    } else if (thisY - PacmanYCord == 0) {
       if (poThis != 1) {
         this.y = this.y;
       }
@@ -71,6 +80,7 @@ class Ghost {
     ellipse(this.x*25+(12.5-this.r)+this.r, this.y*25+(12.5-this.r)+this.r, this.r * 2, this.r * 2);
   }
   update() {
+    directionDecision(FieldData);
 
-
+  }
 }
