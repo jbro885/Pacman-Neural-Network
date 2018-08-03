@@ -15,14 +15,12 @@ function draw() {
         PacMan.think(FieldData);
         PacMan.update();
 
-          // It's hit a Rong Field
-          //pipes[j].hits(activePacs[i])
-          if (FieldData[PacMan.cy()][PacMan.cx()] === 1) {
-            // Remove this Pacman
-            console.log("hit!");
-            activePacs.splice(i, 1);
-            break;
-          }
+
+        if (FieldData[PacMan.cy()][PacMan.cx()] === 1) {
+          // Remove this Pacman
+          console.log("hit!");
+          activePacs.splice(i, 1);
+        }
 
 
 
@@ -53,16 +51,9 @@ function draw() {
             activePacs.splice(i, 1);
             break;
           }
-          //Ghosts
-          for (var i = 0; i < Ghosts.length; i++) {
-            let G = Ghosts[i];
-            //Ghost
-            Ghost.update();
-          }
 
 
       }
-
 
     // Add a new pipe every so often
     // if (counter % 75 == 0) {
@@ -106,6 +97,10 @@ function draw() {
   for (let e = 0; e < activePacs.length; e++) {
     activePacs[e].show();
   }
+  for (let i = 0; i < GhostNames.length; i++) {
+    Ghosts[i].show(GhostNames[i]);
+  }
+
   // If we're out of birds go to the next generation
   if (activePacs.length == 0) {
     nextGeneration();

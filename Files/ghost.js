@@ -1,15 +1,14 @@
 //Movment of the Ghosts
 class Ghost {
-  alert("asd");
   constructor() {
     //Start Position
-    this.x = 13; //13.5
-    this.y = 23;  //23
+    this.x = 1; //13.5
+    this.y = 1;  //23
     this.r = 10;
     // Speed
     this.Speed = 1;
   }
-  directionDecision(FieldData) {
+  directionDecision(FieldData, PacmanXCord, PacmanYCord) {
     let thisX = Math.round(this.x);
     let thisY = Math.round(this.y);
 
@@ -64,13 +63,22 @@ class Ghost {
   }
   // Display the Pacman
   show(name) {
+
     if (name == "CLYDE" || name == 0) {
+      this.x = 1;
+      this.y = 1;
       fill(254, 160, 1);
     } else if (name == "BLINKY" || name == 1) {
+      this.x = 2;
+      this.y = 1;
       fill(253, 35, 4);
     } else if (name == "PINKY" || name == 2) {
+      this.x = 3;
+      this.y = 1;
       fill(254, 178, 178);
     } else if (name == "INKY" || name == 3) {
+      this.x = 4;
+      this.y = 1;
       fill(0, 223, 223);
     } else {
       alert("Keinen Geist Ausgewählt");
@@ -79,8 +87,7 @@ class Ghost {
 //Pff
     ellipse(this.x*25+(12.5-this.r)+this.r, this.y*25+(12.5-this.r)+this.r, this.r * 2, this.r * 2);
   }
-  update() {
-    directionDecision(FieldData);
-
+  update(FieldData, PacmanXCord, PacmanYCord) {
+    this.directionDecision(FieldData, PacmanXCord, PacmanYCord);
   }
 }
