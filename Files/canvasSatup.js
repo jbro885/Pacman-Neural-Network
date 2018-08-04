@@ -39,9 +39,10 @@ let GenerationNumber = 1;
 
 let bestPacMan;
 
-
-
-
+//Ghosts
+let Ghosts;
+let tempGhost;
+let GhostNames = ["CLYDE","BLINKY","PINKY","INKY"];
 
 
 
@@ -56,12 +57,15 @@ function setup() {
   allTimeHighScoreSpan = select('#ahs');
   htmlGenCounter = select('#gen');
 
-
   // Create a population
   for (let i = 0; i < totalPopulation; i++) {
     let Pac = new PacMan();
     activePacs[i] = Pac;
     allPacs[i] = Pac;
     EverPacs[i] = Pac;
+  }
+  for (let i = 0; i < GhostNames.length; i++) {
+    let ghost = new Ghost();
+    Ghosts[i] = ghost;
   }
 }
