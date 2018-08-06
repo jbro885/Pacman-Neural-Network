@@ -40,7 +40,7 @@ let GenerationNumber = 1;
 let bestPacMan;
 
 //Ghosts
-let Ghosts;
+let Ghosts = [];
 let tempGhost;
 let GhostNames = ["CLYDE","BLINKY","PINKY","INKY"];
 
@@ -64,8 +64,7 @@ function setup() {
     allPacs[i] = Pac;
     EverPacs[i] = Pac;
   }
-  // for (let i = 0; i < GhostNames.length; i++) {
-  //   let ghost = new Ghost();
-  //   Ghosts[i] = ghost;
-  // }
+  for (let i = 0; i < GhostNames.length; i++) {
+    Ghosts[0] = new Ghost();
+  }
 }
