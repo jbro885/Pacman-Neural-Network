@@ -61,6 +61,10 @@ function draw() {
     // }
 
     // console.log(counter);
+    for (var w = 0; w < Ghost.length; w++) {
+      let GH = Ghost[w];
+      GH.directionDecision(FieldData, 10, 20);
+    }
 
   }
 
