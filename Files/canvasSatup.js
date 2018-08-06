@@ -64,8 +64,8 @@ function setup() {
     allPacs[i] = Pac;
     EverPacs[i] = Pac;
   }
-  for (let i = 0; i < GhostNames.length; i++) {
-    let ghost = new Ghost();
-    Ghosts[i] = ghost;
-  }
+  // for (let i = 0; i < GhostNames.length; i++) {
+  //   let ghost = new Ghost();
+  //   Ghosts[i] = ghost;
+  // }
 }

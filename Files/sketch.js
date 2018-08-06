@@ -97,9 +97,9 @@ function draw() {
   for (let e = 0; e < activePacs.length; e++) {
     activePacs[e].show();
   }
-  for (let i = 0; i < GhostNames.length; i++) {
-    Ghosts[i].show(GhostNames[i]);
-  }
+  // for (let i = 0; i < GhostNames.length; i++) {
+  //   Ghosts[i].show(GhostNames[i]);
+  // }
 
   // If we're out of birds go to the next generation
   if (activePacs.length == 0) {
