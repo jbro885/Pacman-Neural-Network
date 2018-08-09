@@ -8,3 +8,7 @@ This is a Projekt with the neural Network lib from Coding Train. I startet with 
 
 Lib:
 https://github.com/CodingTrain/Toy-Neural-Network-JS
+https://youtu.be/aircAruvnKk
+https://youtu.be/IHZwWFHWa-w
+
+
